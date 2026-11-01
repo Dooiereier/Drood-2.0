@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1366777262, guid: c37b925f2b4978342b2e0b83a8fa404a, type: 3}
+  m_Name: ModData
+  m_EditorClassIdentifier: 
+  _assemblies:
+  - Drood 2.0.dll
+  _author: Dooiereier
+  _description: "Drood 2.0 features:\n\n\u2022 Parachutes on AG1 (steerable ram-air
+    or round canopy), skydiving with steering (keys or mouse). Various landing animations.\n\u2022
+    Multiple tethers now possible\n\u2022 Attach points on the limbs, head and torso
+    (parts follow the limbs)\n\u2022 Look-up camera in translation mode (T), useful
+    for fpv maneuvering in a space station\n\nThe stock drood is unchanged. <color=red>Requires
+    Juno Harmony.</color>\n\nJump plane: ExcaliburAerospace's Cessna Caravan (SimpleRockets.com),
+    with permission."
+  _loadPriority: 1000
+  _name: Drood 2.0
+  _otherAssets:
+  - {fileID: 100100000, guid: 240b9c386359640a394d209b8a885402, type: 3}
+  - {fileID: 100100000, guid: 7ad3d2d01e0647dabeb0df07a0dec7e1, type: 3}
+  - {fileID: 100100000, guid: 47717d65d09b49279148e699e6bf1c0b, type: 3}
+  - {fileID: 100100000, guid: e6c1d5a5548e4da5b79ace3149f09a38, type: 3}
+  - {fileID: 100100000, guid: a30f834f72dd4f528cde483bb30e1ceb, type: 3}
+  - {fileID: 100100000, guid: 516467f59ed934aba98ef6c52a005746, type: 3}
+  - {fileID: 100100000, guid: 5e70714eaa4bc42daad20a7624977f7b, type: 3}
+  - {fileID: 4900000, guid: 44414b31bb2d47269c45bf65a3638139, type: 3}
+  _prefabs: []
+  _steamDescription: 
+  _steamLanguage: English
+  _steamPreviewPath: 
+  _steamTags: 
+  _steamTitle: 
+  _steamVisibility: 0
+  _versionMajor: 0
+  _versionMinor: 9
+  _partCategories: []
+  _parts:
+  - {fileID: 4900000, guid: 4c7d67e2897949c6a89007ee7c5076c5, type: 3}
+  _partStyleExtensions: []
+  _partTextureStyles: []
+  _persistentObjects: []
+  _uiResourceDatabases: []

@@ -1,0 +1,61 @@
+<Part name="Drood2">
+  <PartType id="Drood2" includeInBodyDrag="true" name="Drood 2.0" prefabPath="Craft/Parts/Prefabs/Eva.prefab" mass="115" price="0" partCollisions="Always" allowIndividualPartRemoval="true" usePreferredNodeName="false" allowDesignerReorientationOnPullout="false" defaultMaterials="15,16,17,18,19" subpartsSharePartStyle="false" stylesShareHeader="false">
+    <Modifiers>
+      <Config autoActivateIfNoStageOrActivationGroup="true" buoyancyBaseScale="2.75" buoyancyUserScale="1" castShadows="true" centerOfMass="0,0,0" collisionDisconnectImpulse="750" collisionDisconnectVelocity="-1" collisionExplodeImpulse="1500" collisionExplodeVelocity="-1" collisionPreventExternalDisconnections="true" collisionVelocityMode="None" dragScale="1" dragScaleActive="1" dragScaleAngular="1" explosiveness="0" fuelLine="false" heatShield="0" heatShieldBaseScale="1" heatShieldMass="0" heatShieldScale="-1" heatShieldValidation="true" ignoreValidation="false" includeInDrag="true" inertiaTensorBaseScale="1" inertiaTensorMin="0.05" inertiaTensorUserScale="1" initialCraftNodeId="-1" massScale="1" maxDamage="100" maxDrag="0" maxDragActive="0" maxTemperature="470" occlusion="Auto" partCollisionHandling="Default" partCollisionResponse="Default" partScale="1,1,1" partSelectionEnabled="true" preventDebris="true" priceScale="1" raiseWaterEventsEvenIfNotBuoyant="false" renderQueue="BeforeDepthMask" stageActivationType="None" supportsActivation="false" supportsTransparency="true" thermalMassRatio="1" inspectorEnabled="false" partPropertiesEnabled="false" staticPriceAndMass="true" version="1" versionLast="1" versionsAllowed="" />
+      <CommandPod activationGroupNames="Parachute,Restart Challenge,,Steering Display,,,,,," activationGroupStates="false,false,false,false,false,false,false,false,false,false" autoRecalculateStages="true" configurableContents="false" configureBattery="0" configureGyros="0" craftConfigAutoAssign="false" craftConfigType="Plane" currentStage="0" pidPitch="0,0,0" pidRoll="0,0,0" pilotSeatRotation="0,0,0" powerConsumption="0" reorientCraftOnConfigChange="true" replicateActivationGroups="None" replicateControls="false" replicateStageActivations="false" stageCalculationVersion="0" useDefaultPilotSeatRotation="true" inspectorEnabled="false" partPropertiesEnabled="true" staticPriceAndMass="true" version="1" versionLast="1" versionsAllowed="" />
+      <Eva crewId="0" crewName="Crew member" grapplingHookEnabled="true" gDamageScale="1" gTolerance="7" jetpackAvailable="true" jetpackEnabled="true" jetpackPowerScalar="1" jumpPowerScalar="1" requiresCrewMember="true" inspectorEnabled="true" partPropertiesEnabled="true" staticPriceAndMass="true" version="1" versionLast="1" versionsAllowed="" />
+      <CameraVantage autoCenterCamera="true" cameraOffset="0,0.75,0.08" cameraRotationOffset="0,0,0" dirtIntensity="0" enabledByDefault="false" hideBase="false" scale="1" fieldOfView="70" fieldOfViewMax="100" fieldOfViewMin="40" isHidden="true" isNight="false" lookAtCommandPod="false" manualRegister="true" padPosition="false" priority="0" variableZoom="false" inspectorEnabled="false" partPropertiesEnabled="false" staticPriceAndMass="true" version="1" versionLast="1" versionsAllowed="" />
+      <FuelTank autoFuelType="false" capacity="6" fuel="6" fuelType="Jetpack" priority="0" subPriority="0" utilization="-1" inspectorEnabled="false" partPropertiesEnabled="false" staticPriceAndMass="true" version="1" versionLast="1" versionsAllowed="" />
+      <Drood2 />
+      <CameraVantage autoCenterCamera="true" cameraOffset="0,1.6,-4" cameraRotationOffset="12,0,0" dirtIntensity="0" enabledByDefault="true" hideBase="false" scale="1" fieldOfView="60" fieldOfViewMax="90" fieldOfViewMin="1" isHidden="false" isNight="false" lookAtCommandPod="false" manualRegister="false" padPosition="false" priority="0" variableZoom="false" inspectorEnabled="false" partPropertiesEnabled="false" staticPriceAndMass="true" version="1" versionLast="1" versionsAllowed="" />
+      <Drood2Limbs />
+    </Modifiers>
+    <AttachPoints>
+      <AttachPoint name="AttachPoint1" displayName="Base" position="0,0,0" rotation="0,180,0" positionOffset="0,0,0" rotationOffset="0,0,0" allowRotation="true" allowInvertedConnection="false" canReceive="false" canSeek="true" ignoreSurfaces="false" jointType="Rigid" connectionType="Eva" requiresPhysicsJoint="true" />
+      <AttachPoint name="DroodSurface" displayName="Torso" surface="DroodSurfaceCollider" canSeek="false" />
+      <AttachPoint name="DroodSurfaceHead" displayName="Head" surface="DroodSurfaceHeadCollider" canSeek="false" />
+      <AttachPoint name="DroodSurfaceLeftUpperArm" displayName="Left upper arm" surface="DroodSurfaceLeftUpperArmCollider" canSeek="false" />
+      <AttachPoint name="DroodSurfaceLeftForearm" displayName="Left forearm" surface="DroodSurfaceLeftForearmCollider" canSeek="false" />
+      <AttachPoint name="DroodSurfaceLeftHand" displayName="Left hand" surface="DroodSurfaceLeftHandCollider" canSeek="false" />
+      <AttachPoint name="DroodSurfaceRightUpperArm" displayName="Right upper arm" surface="DroodSurfaceRightUpperArmCollider" canSeek="false" />
+      <AttachPoint name="DroodSurfaceRightForearm" displayName="Right forearm" surface="DroodSurfaceRightForearmCollider" canSeek="false" />
+      <AttachPoint name="DroodSurfaceRightHand" displayName="Right hand" surface="DroodSurfaceRightHandCollider" canSeek="false" />
+      <AttachPoint name="DroodSurfaceLeftThigh" displayName="Left thigh" surface="DroodSurfaceLeftThighCollider" canSeek="false" />
+      <AttachPoint name="DroodSurfaceLeftShin" displayName="Left shin" surface="DroodSurfaceLeftShinCollider" canSeek="false" />
+      <AttachPoint name="DroodSurfaceLeftFoot" displayName="Left foot" surface="DroodSurfaceLeftFootCollider" canSeek="false" />
+      <AttachPoint name="DroodSurfaceRightThigh" displayName="Right thigh" surface="DroodSurfaceRightThighCollider" canSeek="false" />
+      <AttachPoint name="DroodSurfaceRightShin" displayName="Right shin" surface="DroodSurfaceRightShinCollider" canSeek="false" />
+      <AttachPoint name="DroodSurfaceRightFoot" displayName="Right foot" surface="DroodSurfaceRightFootCollider" canSeek="false" />
+    </AttachPoints>
+    <SubpartTypes>
+      <SubpartType index="0" xmlName="" displayName="Part" />
+    </SubpartTypes>
+  </PartType>
+  <DesignerParts>
+    <DesignerPart name="Drood 2.0" iconType="File" iconPath="Drood2.png" category="Command" description="A drood with a built-in parachute. Activation group 1 deploys it; switching AG1 off repacks it." order="16" showInDesigner="true" snapshotDistanceScaler="0.7" snapshotPartRotation="0,180,0" snapshotPartOffset="0,0.85,0" snapshotRotation="-5,10,0">
+      <Assembly>
+        <Parts>
+          <Part id="1" partType="Drood2" position="0,0,0" rotation="0,0,0">
+            <Config heatShieldScale="0" />
+            <CommandPod stageCalculationVersion="2" />
+            <Eva />
+            <CameraVantage />
+            <FuelTank />
+            <Drood2 />
+            <CameraVantage />
+            <Drood2Limbs />
+          </Part>
+        </Parts>
+      </Assembly>
+    </DesignerPart>
+  </DesignerParts>
+  <PartStyles>
+    <SubpartStyles subpartIndex="0">
+      <Style id="Default" displayName="Default">
+        <TextureStyles>
+          <TextureStyle id="Eva" />
+        </TextureStyles>
+      </Style>
+    </SubpartStyles>
+  </PartStyles>
+</Part>

@@ -1,0 +1,9 @@
+{
+    "name": "Drood 2.0",
+    "references": [
+        "UnityEngine.UI",
+        "Unity.TextMeshPro",
+        "Unity.Mathematics"
+    ],
+    "autoReferenced": true
+}
