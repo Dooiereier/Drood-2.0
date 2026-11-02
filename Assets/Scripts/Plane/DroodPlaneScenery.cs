@@ -43,7 +43,8 @@ namespace Drood2
                 PlayerPrefs.Save();
             }
 
-            // Between the game loop's steps: its parts register in the game loop being run.
+            // A frame later: between the game loop's steps (its parts register in the game loop being
+            // run), and not during a scene load (a landing gear built then throws in its first Update).
             if (!_built && !_buildAsked && !Assets.Scripts.Game.InFlightScene)
             {
                 _buildAsked = true;
@@ -66,10 +67,9 @@ namespace Drood2
         /// <summary>From the mod's scene load: built if wanted earlier.</summary>
         internal static void OnSceneLoaded()
         {
-            _wanted = _wanted || PlayerPrefs.GetInt(WantedKey, 0) != 0;
-            if (_wanted)
+            if (_wanted || PlayerPrefs.GetInt(WantedKey, 0) != 0)
             {
-                BuildOutsideFlight();
+                Want();
             }
         }
 
