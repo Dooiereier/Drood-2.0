@@ -194,7 +194,7 @@ namespace Drood2
             if (!_data.DropStarted && _sinceStart >= LaunchDelay)
             {
                 _data.DropStarted = true;
-                if (_eva.EvaActive && _eva.IsGrounded && DroodChallenge.CanStartHere(craft, _part, Title) && TakeCourse(craft))
+                if (_eva.IsPlayerCraft && _eva.EvaActive && _eva.IsGrounded && DroodChallenge.CanStartHere(craft, _part, Title) && TakeCourse(craft))
                 {
                     DroodLog.Debug("Swoop: launched; the launch spot is the entry gate.");
                     Teleport(pod, craft, true);
