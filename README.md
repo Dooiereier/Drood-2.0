@@ -30,14 +30,13 @@ it, the editor crashes on open (`-[NSConcreteTask terminationStatus]: task not l
 Drood 2.0 uses Harmony at runtime from the separately installed **Juno Harmony** mod, which
 players must install. Harmony is deliberately not in this project or repository. To compile
 (and for the editor to load the mod's assembly), Unity needs `0Harmony.dll` **2.4.2.0** (the
-version Juno Harmony ships) as a local package in a folder next to the project:
+version Juno Harmony ships) as a local package inside the project, in a folder git ignores:
 
-    <parent folder>/Drood 2.0/                                          this project
-    <parent folder>/Drood 2.0 References/com.pardeike.harmony/package.json
-    <parent folder>/Drood 2.0 References/com.pardeike.harmony/0Harmony.dll
+    References/com.pardeike.harmony/package.json
+    References/com.pardeike.harmony/0Harmony.dll
 
 `Packages/manifest.json` refers to it as
-`"com.pardeike.harmony": "file:../../Drood 2.0 References/com.pardeike.harmony"`. ModTools only
+`"com.pardeike.harmony": "file:../References/com.pardeike.harmony"`. ModTools only
 packages DLLs under `Assets/` (`ModBuilderWindowBase.GetPrecompiledAssemblies`), so this one is
 never shipped. Get the DLL from the Harmony 2.4.2 release (github.com/pardeike/Harmony, `net48`
 build); `package.json` needs only a name, version and `"unity": "2022.3"`.

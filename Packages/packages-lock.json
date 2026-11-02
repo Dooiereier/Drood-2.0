@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.pardeike.harmony": {
-      "version": "file:../../Drood 2.0 References/com.pardeike.harmony",
+      "version": "file:../References/com.pardeike.harmony",
       "depth": 0,
       "source": "local",
       "dependencies": {}
