@@ -208,9 +208,10 @@ namespace Drood2
             _sinceStart += Time.deltaTime;
             if (!_data.DropStarted && _sinceStart >= LaunchDelay)
             {
-                // Once per launch: seated in a crew compartment it starts nothing.
+                // Once per launch: seated in a crew compartment, or a drood in the world beside the
+                // craft the player launched, it starts nothing.
                 _data.DropStarted = true;
-                if (_eva.EvaActive && _eva.IsGrounded && DroodChallenge.CanStartHere(craft, _part, "Drop Zone") && TakeTarget(craft))
+                if (_eva.IsPlayerCraft && _eva.EvaActive && _eva.IsGrounded && DroodChallenge.CanStartHere(craft, _part, "Drop Zone") && TakeTarget(craft))
                 {
                     DroodLog.Debug("Drop zone: launched; the launch spot is the target.");
                     Teleport(pod, craft);
