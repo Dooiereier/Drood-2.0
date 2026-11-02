@@ -301,8 +301,7 @@ Drood 2.0 tethers. Kept tethers aren't saved (stock tethers aren't either).
   in the atmosphere T leaves the view alone.
 - **Update check:** at game start Drood 2.0 compares its version with the one on its
   SimpleRockets.com page and, if that's newer, offers to open the page (nothing is downloaded
-  or installed). Off with Settings → Mods → Drood 2.0 → Check for Updates. Until the mod is
-  published the page address is empty (`UpdateCheck.PageUrl`) and no check is made; raise the
+  or installed). Off with Settings → Mods → Drood 2.0 → Check for Updates. The page is `UpdateCheck.PageUrl`; raise the
   version in the Mod Builder before each upload, since the page shows the uploaded version.
 - **Career:** see above (`Drood2TechTreePatch`).
 
