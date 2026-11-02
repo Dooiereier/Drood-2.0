@@ -15,13 +15,13 @@ MonoBehaviour:
   _assemblies:
   - Drood 2.0.dll
   _author: Dooiereier
-  _description: "Drood 2.0 features:\n\n\u2022 Parachutes on AG1 (steerable ram-air
-    or round canopy), skydiving with steering (keys or mouse). Various landing animations.\n\u2022
-    Multiple tethers now possible\n\u2022 Attach points on the limbs, head and torso
-    (parts follow the limbs)\n\u2022 Look-up camera in translation mode (T), useful
-    for fpv maneuvering in a space station\n\nThe stock drood is unchanged. <color=red>Requires
-    Juno Harmony.</color>\n\nJump plane: ExcaliburAerospace's Cessna Caravan (SimpleRockets.com),
-    with permission."
+  _description: "Drood 2.0 features:\n\n\u2022 Parachutes on AG1 (steerable ram-air,
+    swoop or round canopy), skydiving with steering (keys or mouse). Various landing
+    animations and two types of challenges\n\u2022 Multiple tethers\n\u2022 Attach
+    points on the limbs, head and torso (parts follow the limbs) and make drood invisible\n\u2022
+    Look-up camera in translation mode (T), useful for fpv maneuvering in a space
+    station\n\nThe stock drood is unchanged. <color=red>Requires Juno Harmony.</color>\n\nJump
+    plane: ExcaliburAerospace's Cessna Caravan (SimpleRockets.com), with permission."
   _loadPriority: 1000
   _name: Drood 2.0
   _otherAssets:

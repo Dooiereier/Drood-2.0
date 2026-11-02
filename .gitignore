@@ -20,6 +20,10 @@ UserSettings
 # Mono crash reports the game writes into the working directory
 mono_crash.*.json
 
+# Screen recordings
+*.mov
+*.mp4
+
 # Not published
 Assets/Animations/
 Assets/Animations.meta

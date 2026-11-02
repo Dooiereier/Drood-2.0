@@ -50,6 +50,13 @@ namespace Drood2
         [DesignerPropertySpinner(ReleaseNever, "AG 5", "AG 6", "AG 7", "AG 8", "AG 9", "AG 10", Label = "Release on", Tooltip = "<align=left><color=#E6E6E6>Lets the drood go from what it is connected to when the craft it is on switches this activation group on (e.g. the plane's AG 5), so it drops. Vizzy's activate part releases it too.</color>")]
         private string _releaseOn = ReleaseNever;
 
+        // SAVE FORMAT: an XML attribute.
+        [SerializeField]
+        [DesignerPropertyToggleButton(Label = "Make Drood 2.0 invisible", Tooltip = "The drood's body isn't drawn and casts no shadow, in the designer and in flight. It still collides and can be selected; its carried parts, canopy and tethers still show.")]
+        private bool _invisible;
+
+        internal bool Invisible => _invisible;
+
         /// <summary>The activation group of the craft it is on that releases the drood; 0 for none.</summary>
         internal int ReleaseGroup
         {

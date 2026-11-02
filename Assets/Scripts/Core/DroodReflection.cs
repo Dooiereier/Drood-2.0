@@ -23,6 +23,7 @@ namespace Drood2
         // camera controller (the first-person body), private with no public accessor.
         private static readonly FieldInfo CrewAnimControllerField = typeof(EvaScript).GetField("_crewAnimController", Instance);
         private static readonly FieldInfo FpsCameraControllerField = typeof(EvaScript).GetField("_fpsCameraController", Instance);
+        private static readonly FieldInfo EvaRenderersField = typeof(EvaScript).GetField("_renderers", Instance);
         private static readonly MethodInfo UnloadFromCrewCompartmentMethod = typeof(EvaScript).GetMethod("UnloadFromCrewCompartment", Instance);
         private static readonly MethodInfo ActivateEvaForDisconnectedMethod = typeof(EvaScript).GetMethod("ActivateEvaForDisconnectedAstronaut", Instance);
         private static readonly object[] SetTransformArgument = { true };
@@ -131,6 +132,10 @@ namespace Drood2
         internal static CrewAnimController CrewAnimController(EvaScript eva) =>
             eva != null && CrewAnimControllerField != null ? CrewAnimControllerField.GetValue(eva) as CrewAnimController : null;
 
+        /// <summary>The character's own renderers, as the game lists them (null: not available).</summary>
+        internal static Renderer[] EvaRenderers(EvaScript eva) =>
+            eva != null && EvaRenderersField != null ? EvaRenderersField.GetValue(eva) as Renderer[] : null;
+
         internal static FirstPersonCameraController FpsCameraController(EvaScript eva) =>
             eva != null && FpsCameraControllerField != null ? FpsCameraControllerField.GetValue(eva) as FirstPersonCameraController : null;
 
@@ -172,6 +177,7 @@ namespace Drood2
             var missing = new System.Text.StringBuilder();
             Check(missing, CrewAnimControllerField, "EvaScript._crewAnimController", "the calm hanging animation and the run-out's leg animation");
             Check(missing, FpsCameraControllerField, "EvaScript._fpsCameraController", "the drood's own body and fixed eye point in first person");
+            Check(missing, EvaRenderersField, "EvaScript._renderers", "the invisible toggle");
             Check(missing, FieldOfViewField, "CameraVantageData._fieldOfView", "the first-person field of view setting");
             Check(missing, UnloadFromCrewCompartmentMethod, "EvaScript.UnloadFromCrewCompartment", Seats);
             Check(missing, ActivateEvaForDisconnectedMethod, "EvaScript.ActivateEvaForDisconnectedAstronaut", Seats);

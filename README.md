@@ -270,6 +270,7 @@ Drood 2.0 tethers. Kept tethers aren't saved (stock tethers aren't either).
   anything bigger holds the drood; Carried: everything is carried; Anchored: the drood is fixed to
   what it is attached to. Fixed to something, it rests in the calm idle instead of the falling
   animation and doesn't walk.
+- **Make Drood 2.0 invisible:** a toggle in the designer's Attached Parts section, below Release on: the drood's body isn't drawn and casts no shadow, in the designer and in flight. It still collides and can be selected; carried parts, the canopy and tethers still show.
 - **Let go:** Vizzy's "activate part" on the Drood 2.0, or the Attached Parts setting
   **Release on** (AG 5 to AG 10): when the craft the drood is on switches that activation group
   on (its controlling command pod, e.g. the plane's), the drood breaks off what it is fixed
