@@ -99,6 +99,7 @@ namespace Drood2
             _updateSteps = new[]
             {
                 new Guarded("release (before update)", release.ReleaseBeforeUpdate),
+                new Guarded("challenge panel (after a pause)", DroodDropChallengeHud.ShowAfterPause),
                 new Guarded("parachute input", _parachute.InputStep),
                 new Guarded("steering overlay", () => DroodSteeringOverlay.Step(_parachute, eva, _freeFall)),
                 new Guarded("flare cue", () => DroodFlareIndicator.Step(_parachute, eva)),
@@ -124,7 +125,12 @@ namespace Drood2
                 new Guarded("opening sound (paused)", () => _deploySound.Step(true)),
                 new Guarded("audible altimeter (paused)", () => _audible.Step(true)),
                 new Guarded("plane engine (paused)", _planeRide.PausedStep),
-                new Guarded("steering overlay (paused)", () => DroodSteeringOverlay.Step(null, null, null)),
+                new Guarded("guidance (paused)", () =>
+                {
+                    DroodSteeringOverlay.Step(null, null, null);
+                    DroodFlareIndicator.HideWhilePaused();
+                    DroodDropChallengeHud.HideWhilePaused();
+                }),
             };
             _lateSteps = new[]
             {

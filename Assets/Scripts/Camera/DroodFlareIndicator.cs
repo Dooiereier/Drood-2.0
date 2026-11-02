@@ -104,6 +104,15 @@ namespace Drood2
         }
 
         /// <summary>The flight scene ends: the cue goes with its canvas; built anew in the next.</summary>
+        /// <summary>While the game is paused: hidden (the next Step shows it again if it applies).</summary>
+        internal static void HideWhilePaused()
+        {
+            if (_panel != null && _panel.activeSelf)
+            {
+                _panel.SetActive(false);
+            }
+        }
+
         internal static void ForgetFlightScene()
         {
             _panel = null;

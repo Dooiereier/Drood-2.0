@@ -253,6 +253,31 @@ namespace Drood2
             }
 
             _shownSeconds = -1;
+            _hiddenForPause = false;
+        }
+
+        // Hidden for the pause, and shown again by the first flight update after it.
+        private static bool _hiddenForPause;
+
+        internal static void HideWhilePaused()
+        {
+            if (_panel != null && _panel.activeSelf)
+            {
+                _panel.SetActive(false);
+                _hiddenForPause = true;
+            }
+        }
+
+        internal static void ShowAfterPause()
+        {
+            if (_hiddenForPause)
+            {
+                _hiddenForPause = false;
+                if (_panel != null)
+                {
+                    _panel.SetActive(true);
+                }
+            }
         }
 
         internal static string Clock(int seconds) => $"{seconds / 60}:{seconds % 60:00}";
@@ -357,6 +382,7 @@ namespace Drood2
         /// <summary>The flight scene ends: the panel goes with its canvas; built anew in the next.</summary>
         internal static void ForgetFlightScene()
         {
+            _hiddenForPause = false;
             _script = null;
             _panel = null;
             _title = null;
