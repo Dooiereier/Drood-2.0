@@ -40,8 +40,8 @@ MonoBehaviour:
   _steamTags: 
   _steamTitle: 
   _steamVisibility: 0
-  _versionMajor: 0
-  _versionMinor: 9
+  _versionMajor: 1
+  _versionMinor: 0
   _partCategories: []
   _parts:
   - {fileID: 4900000, guid: 4c7d67e2897949c6a89007ee7c5076c5, type: 3}
