@@ -145,6 +145,11 @@ namespace Drood2
         private float _levelShare;
         private float _levelShareRate;
 
+        // The view's pitch below LevelFromHeight, which only goes down, and its rate back to the
+        // free pitch above that height; NaN: not held.
+        private float _viewPitch = float.NaN;
+        private float _viewPitchRate;
+
         /// <summary>
         /// Low under the canopy (the flare) the view is held steady like a head: its pitch above the
         /// horizon follows CanopyLeanKept of the body's (the rest of the lean taken out) through a
@@ -153,7 +158,8 @@ namespace Drood2
         /// S-curves from LevelFromHeight down to LevelFullHeight of the feet above the ground and
         /// from LevelFromSpeed down to LevelFullSpeed (m/s), followed over LevelTakeoverSeconds;
         /// higher up or faster the view is the
-        /// body's. Its bank and heading stay.
+        /// body's. Below LevelFromHeight the resulting pitch only goes down (not up in the flare);
+        /// above it, it eases back to the free pitch. Its bank and heading stay.
         /// </summary>
         private void LevelUnderCanopy()
         {
@@ -161,6 +167,7 @@ namespace Drood2
             if (_parachute == null || !_parachute.IsHanging || craft == null)
             {
                 _levelPitch = float.NaN;
+                _viewPitch = float.NaN;
                 return;
             }
 
@@ -170,6 +177,7 @@ namespace Drood2
             if (level.sqrMagnitude < 1e-4f)
             {
                 _levelPitch = float.NaN;
+                _viewPitch = float.NaN;
                 return;
             }
 
@@ -196,12 +204,67 @@ namespace Drood2
             var low = _levelShare;
             if (low <= 1e-4f)
             {
+                _viewPitch = float.NaN;
                 return;
             }
 
-            var pitch = Mathf.Lerp(bodyPitch, _levelPitch, low) * Mathf.Deg2Rad;
+            var free = Mathf.Lerp(bodyPitch, _levelPitch, low);
+            if (float.IsNaN(_viewPitch))
+            {
+                _viewPitch = free;
+                _viewPitchRate = 0f;
+            }
+            else if (_parachute.FeetAboveGround < LevelFromHeight)
+            {
+                _viewPitch = Mathf.Min(_viewPitch, free);
+                _viewPitchRate = 0f;
+            }
+            else
+            {
+                _viewPitch = Mathf.SmoothDamp(_viewPitch, free, ref _viewPitchRate, LevelSmoothSeconds, Mathf.Infinity, Time.deltaTime);
+            }
+
+            var pitch = _viewPitch * Mathf.Deg2Rad;
             var look = level * Mathf.Cos(pitch) + up * Mathf.Sin(pitch);
             _cameraPoint.rotation = Quaternion.FromToRotation(forward, look) * _cameraPoint.rotation;
+        }
+
+        // The eye point as the game read it, in its parent's frame; false: not read yet.
+        private bool _hasPointRead;
+        private Vector3 _pointReadPosition;
+        private Quaternion _pointReadRotation;
+
+        /// <summary>
+        /// The game places the first-person camera at the start of the frame, from the eye point as
+        /// set in the frame before (FirstPersonCameraController.UpdateCameraPosition) on this frame's
+        /// body. This class sets the point for this frame's body (the steadied view takes out a part
+        /// of the body's pitch), so the camera was off by what that setting changed in a frame, more
+        /// after a longer frame: under a quick pull-up the view flipped up and down every frame.
+        /// Moved by that change here, on top of what the game read (the mouse's look stays), the
+        /// frame renders with this frame's point.
+        /// </summary>
+        private void MatchCameraToPoint(bool underCanopy)
+        {
+            var controller = underCanopy ? DroodReflection.FpsCameraController(_eva) : null;
+            if (controller == null || _cameraPoint == null || _cameraPoint.parent == null
+                || CameraManagerScript.Instance?.CurrentCameraController != controller
+                || !(DroodReflection.FirstPersonParentField?.GetValue(controller) is Transform parent) || controller.CameraTransform == null)
+            {
+                _hasPointRead = false;
+                return;
+            }
+
+            if (_hasPointRead)
+            {
+                var holder = _cameraPoint.parent;
+                var camera = controller.CameraTransform;
+                camera.rotation = _cameraPoint.rotation * Quaternion.Inverse(holder.rotation * _pointReadRotation) * camera.rotation;
+                parent.position += _cameraPoint.position - holder.TransformPoint(_pointReadPosition);
+            }
+
+            _hasPointRead = true;
+            _pointReadPosition = _cameraPoint.localPosition;
+            _pointReadRotation = _cameraPoint.localRotation;
         }
 
         private void PlaceEyeOnHead()
@@ -429,6 +492,7 @@ namespace Drood2
             if (!firstPerson)
             {
                 _levelPitch = float.NaN;
+                _viewPitch = float.NaN;
             }
 
             if (!firstPerson && _showing)
@@ -440,6 +504,8 @@ namespace Drood2
             {
                 Dip();
             }
+
+            MatchCameraToPoint(flownInFirstPerson && _parachute != null && _parachute.IsHanging);
 
             if (firstPerson || lookingUp)
             {

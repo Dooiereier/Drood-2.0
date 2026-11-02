@@ -16,14 +16,13 @@ namespace Drood2
     /// </summary>
     public static class UpdateCheck
     {
-        // The mod's SimpleRockets.com page, set once Drood 2.0 is published. While it's empty no
-        // check is made.
-        private const string PageUrl = "";
+        // The mod's SimpleRockets.com page.
+        private const string PageUrl = "https://www.simplerockets.com/Mods/View/358081";
 
         private const int TimeoutSeconds = 10;
 
-        // The page's general info: <span class="spec-label">Mod Version:</span> <span class="spec-value">1.0</span>
-        private static readonly Regex PageVersion = new Regex(@"Mod Version:\s*</span>\s*<span[^>]*>\s*(\d+)\.(\d+)", RegexOptions.IgnoreCase);
+        // The page's general info: <span class="spec-label">Mod Version:</span> <span class="spec-value">v1.0</span>
+        private static readonly Regex PageVersion = new Regex(@"Mod Version:\s*</span>\s*<span[^>]*>\s*v?(\d+)\.(\d+)", RegexOptions.IgnoreCase);
 
         private static bool _started;
 
@@ -36,12 +35,6 @@ namespace Drood2
             }
 
             _started = true;
-            if (string.IsNullOrEmpty(PageUrl))
-            {
-                DroodLog.Debug("Update check skipped: the mod's page isn't set (not published yet).");
-                return;
-            }
-
             if (!(Assets.Scripts.ModSettings.Instance?.CheckForUpdates?.Value ?? true))
             {
                 DroodLog.Debug("Update check off (setting).");
