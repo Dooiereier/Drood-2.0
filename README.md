@@ -165,7 +165,10 @@ the turn keys bank (up to 30°, held against the horizon) and the turn follows, 
 aeroplane, with the arm corrections shown. The jetpack is off in the arch. In first person the drood sees its own body
 (arch and canopy), the view turns at most 95° left and right, and the mouse looks around.
 In the arch and under the canopy the body is held in a still, squared pose (the head still
-moves); under the canopy the legs drift together, the right a little later.
+moves); under the canopy the legs drift together, the right a little later. In air thick
+enough to skydive in (at least 0.1 kg/m³, below about 17 km on Earth) Drood 2.0 keeps the normal
+animations where the game would use its space ones (a frame not locked to the surface: high up,
+or after a teleport), so the arch stays flat (`AtmosphereAnimationPatch`).
 
 **Mouse steering:** with the game's mouse joystick switched on (its own key), the mouse steers
 while skydiving and under the canopy instead of looking around: the cursor's place on the
@@ -329,7 +332,7 @@ Tuning constants are at the top of each file, with their meaning.
 
 ## Test checklist
 
-- [ ] Log shows `[Drood 2.0] Part 'Drood 2.0' loaded from the mod's part XML.` and `Harmony patches: 7 applied, 0
+- [ ] Log shows `[Drood 2.0] Part 'Drood 2.0' loaded from the mod's part XML.` and `Harmony patches: 8 applied, 0
       failed.`
 - [ ] Designer: Drood 2.0 is in the Command category. Parts snap onto every limb, head, hands
       and feet; symmetry works; the drood can still be seated.

@@ -21,6 +21,7 @@ namespace Drood2
         private readonly DroodLandingFall _landingFall;
         private readonly DroodHangingPose _hangingPose;
         private readonly DroodCalmAnimator _calmAnimator;
+        private readonly DroodAtmosphereAnimation _atmosphereAnimation;
         private readonly DroodRunOut _runOut;
         private readonly DroodVictory _victory;
         private readonly DroodFreeFall _freeFall;
@@ -58,6 +59,7 @@ namespace Drood2
             _ik = drood.GetComponentInChildren<FullBodyBipedIK>(true);
             _ikOwner = GetOrAdd<DroodIKOwner>(drood);
             _calmAnimator = GetOrAdd<DroodCalmAnimator>(drood);
+            _atmosphereAnimation = GetOrAdd<DroodAtmosphereAnimation>(drood);
             _runOut = GetOrAdd<DroodRunOut>(drood);
             _victory = GetOrAdd<DroodVictory>(drood);
             _freeFall = GetOrAdd<DroodFreeFall>(drood);
@@ -112,6 +114,7 @@ namespace Drood2
                 new Guarded("landing fall", _landingFall.Step),
                 new Guarded("victory", _victory.Step),
                 new Guarded("hanging pose", _hangingPose.Step),
+                new Guarded("atmosphere animations", _atmosphereAnimation.Step),
                 new Guarded("calm animator", _calmAnimator.Step),
                 new Guarded("run-out animation", _runOut.AnimatorStep),
                 new Guarded("wind sound", () => _windSound.Step(false)),

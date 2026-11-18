@@ -28,6 +28,8 @@ namespace Drood2
             {
                 _landedAnchor += positionDelta;
             }
+
+            _stepRoot += positionDelta;
         }
 
         /// <summary>
