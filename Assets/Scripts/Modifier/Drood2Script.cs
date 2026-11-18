@@ -77,8 +77,13 @@ namespace Drood2
             var body = PartScript?.BodyScript?.RigidBody;
             if (body != null && !body.isKinematic && body.interpolation != RigidbodyInterpolation.None)
             {
+                // Only when the Transform moved by this move and the physics pose didn't: a game
+                // that moves the physics pose itself (Juno 1.4.203 does when it recentres) has the
+                // Transform behind it until the next frame, and copying it back would undo the move
+                // (a drood in free fall ended up kilometres below the ground).
                 var moved = Vector3.Distance(body.position, body.transform.position);
-                if (moved >= SyncMoveDistance)
+                var behind = Vector3.Distance(body.position + positionDelta, body.transform.position) < SyncMoveDistance;
+                if (moved >= SyncMoveDistance && behind)
                 {
                     body.position = body.transform.position;
                     body.rotation = body.transform.rotation;
@@ -86,7 +91,9 @@ namespace Drood2
 
                 if (moved > LogMoveDistance)
                 {
-                    DroodLog.Debug($"Synced the interpolated body after a {moved:0} m move (teleport).");
+                    DroodLog.Debug(behind
+                        ? $"Synced the interpolated body after a {moved:0} m move (teleport)."
+                        : $"Interpolated body {moved:0} m from its Transform after a {positionDelta.magnitude:0} m move: left as the game placed it.");
                 }
             }
 
