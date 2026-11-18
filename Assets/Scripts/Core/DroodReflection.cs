@@ -129,6 +129,17 @@ namespace Drood2
             PartRotationSetter?.Invoke(part, ZeroArgument);
         }
 
+        // The drood's animation set picked again (DroodAtmosphereAnimation).
+        private static readonly MethodInfo SelectAnimationMethod = typeof(CrewAnimController).GetMethod("SelectAnimationController", Instance);
+
+        internal static void SelectAnimationController(CrewAnimController controller)
+        {
+            if (controller != null && SelectAnimationMethod != null)
+            {
+                SelectAnimationMethod.Invoke(controller, null);
+            }
+        }
+
         internal static CrewAnimController CrewAnimController(EvaScript eva) =>
             eva != null && CrewAnimControllerField != null ? CrewAnimControllerField.GetValue(eva) as CrewAnimController : null;
 
@@ -178,6 +189,8 @@ namespace Drood2
             Check(missing, CrewAnimControllerField, "EvaScript._crewAnimController", "the calm hanging animation and the run-out's leg animation");
             Check(missing, FpsCameraControllerField, "EvaScript._fpsCameraController", "the drood's own body and fixed eye point in first person");
             Check(missing, EvaRenderersField, "EvaScript._renderers", "the invisible toggle");
+            Check(missing, SelectAnimationMethod, "CrewAnimController.SelectAnimationController", "the normal animations high in the atmosphere");
+            Check(missing, typeof(CrewAnimController).GetField("_zeroGeeAnimation", Instance), "CrewAnimController._zeroGeeAnimation", "the normal animations high in the atmosphere");
             Check(missing, FieldOfViewField, "CameraVantageData._fieldOfView", "the first-person field of view setting");
             Check(missing, UnloadFromCrewCompartmentMethod, "EvaScript.UnloadFromCrewCompartment", Seats);
             Check(missing, ActivateEvaForDisconnectedMethod, "EvaScript.ActivateEvaForDisconnectedAstronaut", Seats);

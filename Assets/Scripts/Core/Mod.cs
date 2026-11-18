@@ -93,6 +93,7 @@ namespace Assets.Scripts
                     RuntimeHelpers.RunClassConstructor(type.TypeHandle);
                     harmony.CreateClassProcessor(type).Patch();
                     applied++;
+                    Drood2.DroodAtmosphereAnimation.PatchApplied |= type.Name == "AtmosphereAnimationPatch";
                 }
                 catch (System.Exception e)
                 {

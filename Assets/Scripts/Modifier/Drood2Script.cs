@@ -61,14 +61,18 @@ namespace Drood2
         }
 
         /// <summary>
-        /// The game moved this craft: world recentring, or a teleport
-        /// (CraftNode.RecalculateFrameState sets the craft's Transform, then calls this). The
-        /// drood's rigidbody is interpolated (EvaScript sets that every physics tick), and Unity
-        /// rewrites an interpolated body's Transform from its physics pose every rendered frame, so
-        /// the move would be undone before physics sees it (teleporting a drood would only work
-        /// while paused). Copy the moved Transform into the rigidbody right away (only for a move of
-        /// at least SyncMoveDistance). The stock drood
-        /// has the same bug; only Drood 2.0 gets this fix.
+        /// The game moved this craft by <paramref name="positionDelta"/>: world recentring, or a
+        /// teleport. A teleport (and a recentre outside the physics step) moves the bodies'
+        /// Transforms; the drood's rigidbody is interpolated (EvaScript sets that every physics
+        /// tick), and Unity rewrites an interpolated body's Transform from its physics pose, so the
+        /// move would be undone before physics sees it (teleporting a drood would only work while
+        /// paused): the moved Transform is copied into the rigidbody right away (for a move of at
+        /// least SyncMoveDistance). The stock drood has the same bug; only Drood 2.0 gets this fix.
+        /// A recentre in the physics step (CraftScript.RecenterDebris) moves the rigidbody itself
+        /// and leaves the Transform (in flight a body isn't a child of the craft): copied back, the
+        /// Transform's old coordinates would undo the move (a drood in free fall ended up
+        /// kilometres below the ground). Which one moved shows in the direction: the Transform
+        /// ahead of the rigidbody along the move, or behind it.
         /// </summary>
         public override void RecalculateFrameState(Vector3 positionDelta, Vector3 velocityDelta)
         {
@@ -77,8 +81,10 @@ namespace Drood2
             var body = PartScript?.BodyScript?.RigidBody;
             if (body != null && !body.isKinematic && body.interpolation != RigidbodyInterpolation.None)
             {
-                var moved = Vector3.Distance(body.position, body.transform.position);
-                if (moved >= SyncMoveDistance)
+                var toTransform = body.transform.position - body.position;
+                var moved = toTransform.magnitude;
+                var transformMoved = Vector3.Dot(toTransform, positionDelta) > 0f;
+                if (moved >= SyncMoveDistance && transformMoved)
                 {
                     body.position = body.transform.position;
                     body.rotation = body.transform.rotation;
@@ -86,7 +92,9 @@ namespace Drood2
 
                 if (moved > LogMoveDistance)
                 {
-                    DroodLog.Debug($"Synced the interpolated body after a {moved:0} m move (teleport).");
+                    DroodLog.Debug(transformMoved
+                        ? $"Synced the interpolated body after a {moved:0} m move (teleport)."
+                        : $"Interpolated body {moved:0} m from its Transform after a {positionDelta.magnitude:0} m move: left as the game placed it.");
                 }
             }
 
